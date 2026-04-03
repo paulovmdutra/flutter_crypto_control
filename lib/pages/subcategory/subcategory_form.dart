@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_crypto_control/domain/models/category.dart';
 import 'package:flutter_crypto_control/domain/models/sub_category.dart';
-import 'package:flutter_crypto_control/domain/models/transaction.dart';
 import 'package:flutter_crypto_control/pages/app/generic_form/generic_stateful_form.dart';
 import 'package:flutter_crypto_control/shared/app_response_models.dart';
 import 'package:flutter_crypto_control/widgets/app_colors.dart';
 import 'package:flutter_crypto_control/widgets/app_textstyles.dart';
 import 'package:flutter_crypto_control/widgets/color_selector.dart';
+import 'package:flutter_crypto_control/widgets/error_info_widget.dart';
 
 class SubCategoryForm extends GenericStatefulForm<SubCategory> {
   final List<Category?>? listCategories;
@@ -40,12 +40,14 @@ class SubCategoryFormDialogState
   ValueNotifier<int> _colorValueNotifier = ValueNotifier(Colors.red.toARGB32());
   ValueNotifier<IconData> _iconDataNotifier = ValueNotifier(Icons.money_off);
   ValueNotifier<String?> _selectedCategoryIdNotifier = ValueNotifier(null);
+  String? initialCategoryId;
+  bool isEditing = false;
 
   @override
   void initState() {
     super.initState();
 
-    final isEditing = widget.entityToEdit != null;
+    isEditing = widget.entityToEdit != null;
     _nameController = TextEditingController(
       text: widget.entityToEdit?.name ?? '',
     );
@@ -58,21 +60,19 @@ class SubCategoryFormDialogState
       widget.entityToEdit?.iconCodePoint ?? Icons.money_off,
     );
 
-    String? initialCatId;
-
     if (widget.parentCategory != null) {
       // Se veio uma categoria pai forçada (ex: criando sub dentro de cat)
-      initialCatId = widget.parentCategory!.publicId;
+      initialCategoryId = widget.parentCategory!.publicId;
     } else if (isEditing) {
       // Se está editando
-      initialCatId = widget.entityToEdit!.publicId;
+      initialCategoryId = widget.entityToEdit!.publicId;
     } else if (widget.listCategories != null &&
         widget.listCategories!.isNotEmpty) {
       // Padrão: Pega o primeiro da lista
-      initialCatId = widget.listCategories!.first!.publicId;
+      initialCategoryId = widget.listCategories!.first!.publicId;
     }
 
-    _selectedCategoryIdNotifier = ValueNotifier(initialCatId);
+    _selectedCategoryIdNotifier = ValueNotifier(initialCategoryId);
   }
 
   @override
@@ -126,7 +126,41 @@ class SubCategoryFormDialogState
 
     final allCategories = widget.listCategories;
 
-    if (allCategories == null || allCategories.isEmpty) {
+    if (isEditing && initialCategoryId == null && allCategories != null) {
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Center(
+            child: ErrorInfoWidget(
+              error: ErrorDescription(
+                'A categoria associada a esta subcategoria não está disponível na lista atual. Por favor, selecione uma categoria válida ou verifique se o cadastro da categoria pai foi concluído corretamente.',
+              ),
+              onReload: () {},
+            ),
+          ),
+        ],
+      );
+    }
+
+    if (initialCategoryId == null) {
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Center(
+            child: ErrorInfoWidget(
+              error: ErrorDescription(
+                'A categoria selecionada para esta subcategoria não está disponível. Por favor, selecione uma categoria válida. Verifique se o cadastro da categoria pai foi concluído corretamente.',
+              ),
+              onReload: () {},
+            ),
+          ),
+        ],
+      );
+    }
+
+    if (allCategories!.isEmpty) {
       return Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         mainAxisSize: MainAxisSize.min,

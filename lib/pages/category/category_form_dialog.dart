@@ -139,7 +139,7 @@ class CategoryFormDialogState
           },
         ),
         const SizedBox(height: 15),
-        IconSelector(iconDataNotifier: this.iconDataNotifier),
+        IconSelector(iconDataNotifier: iconDataNotifier),
       ],
     );
   }

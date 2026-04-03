@@ -9,6 +9,7 @@ class InMemoryCategoryRepository extends FakeRepository<Category> {
       // Receitas
       Category(
         id: 1,
+        publicId: '1',
         name: 'Salário',
         type: TransactionType.income,
         colorValue: 0xFF4CAF50,
@@ -16,6 +17,7 @@ class InMemoryCategoryRepository extends FakeRepository<Category> {
       ),
       Category(
         id: 2,
+        publicId: '2',
         name: 'Investimentos',
         type: TransactionType.income,
         colorValue: 0xFF2196F3,
@@ -23,6 +25,7 @@ class InMemoryCategoryRepository extends FakeRepository<Category> {
       ),
       Category(
         id: 3,
+        publicId: '3',
         name: 'Extra',
         type: TransactionType.income,
         colorValue: 0xFFFFC107,
@@ -32,6 +35,7 @@ class InMemoryCategoryRepository extends FakeRepository<Category> {
       // Despesas
       Category(
         id: 4,
+        publicId: '4',
         name: 'Moradia',
         type: TransactionType.expense,
         colorValue: 0xFFF44336,
@@ -39,6 +43,7 @@ class InMemoryCategoryRepository extends FakeRepository<Category> {
       ),
       Category(
         id: 5,
+        publicId: '5',
         name: 'Alimentação',
         type: TransactionType.expense,
         colorValue: 0xFFFF9800,
@@ -46,6 +51,7 @@ class InMemoryCategoryRepository extends FakeRepository<Category> {
       ),
       Category(
         id: 6,
+        publicId: '6',
         name: 'Transporte',
         type: TransactionType.expense,
         colorValue: 0xFF673AB7,
@@ -53,6 +59,7 @@ class InMemoryCategoryRepository extends FakeRepository<Category> {
       ),
       Category(
         id: 7,
+        publicId: '7',
         name: 'Saúde',
         type: TransactionType.expense,
         colorValue: 0xFFE91E63,
@@ -60,6 +67,7 @@ class InMemoryCategoryRepository extends FakeRepository<Category> {
       ),
       Category(
         id: 8,
+        publicId: '8',
         name: 'Lazer',
         type: TransactionType.expense,
         colorValue: 0xFF00BCD4,
