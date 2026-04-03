@@ -7,7 +7,7 @@ import 'package:flutter_crypto_control/widgets/progress_widget.dart';
 import 'package:flutter_crypto_control/widgets/widgets.dart';
 
 class LoginFormWidget extends StatefulWidget {
-  final UsuarioController loginController;
+  final UserController loginController;
   final VoidCallback onSubmit;
 
   const LoginFormWidget({

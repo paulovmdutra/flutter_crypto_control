@@ -6,7 +6,7 @@ import 'package:flutter_crypto_control/view_model/usuario_view_model.dart';
 import 'package:flutter_crypto_control/widgets/widgets.dart';
 
 class RegisterUserFormWidget extends StatefulWidget {
-  final UsuarioController userController;
+  final UserController userController;
   final VoidCallback onSubmit;
 
   const RegisterUserFormWidget({
@@ -77,7 +77,7 @@ class _RegisterUserFormWidgetState extends State<RegisterUserFormWidget> {
   }
 
   void preencherControllersComDadosFicticios() {
-    UsuarioController userController = widget.userController;
+    UserController userController = widget.userController;
     UsuarioViewModel viewModel = userController.usuarioViewModel;
     viewModel.nomeController.text = 'João da Silva';
     viewModel.loginController.text = 'joaosilva';

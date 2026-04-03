@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_crypto_control/application/usecase/service_result.dart';
 import 'package:flutter_crypto_control/controller/controllers.dart';
-import 'package:flutter_crypto_control/domain/models/usuario.dart';
+import 'package:flutter_crypto_control/domain/models/user.dart';
 import 'package:flutter_crypto_control/pages/app/generic_form_screen.dart';
 import 'package:flutter_crypto_control/widgets/form_button.dart';
 import 'package:flutter_crypto_control/widgets/widgets.dart';
-import 'package:flutter_crypto_control/routes.dart';
+import 'package:flutter_crypto_control/core/routes.dart';
 import 'package:flutter_crypto_control/service_locator.dart';
 import 'package:flutter_crypto_control/shared/utils/formatter/date_input_formatter.dart';
 import 'package:flutter_crypto_control/shared/utils/formatter/phone_input_formatter.dart';
@@ -21,13 +21,13 @@ class UsuarioFormScreen extends StatefulWidget {
 }
 
 class UsuarioFormScreenState extends State<UsuarioFormScreen> {
-  final UsuarioController controller =
-      UsuarioController(); /* ServiceLocator.instance.getService(
+  final UserController controller =
+      UserController(); /* ServiceLocator.instance.getService(
     ServiceKeys.controllerUser.name,
   );*/
 
-  final GlobalKey<GenericFormScreenState<Usuario, UsuarioController>>
-  _formScreenKey = GlobalKey();
+  final GlobalKey<GenericFormScreenState<User, UserController>> _formScreenKey =
+      GlobalKey();
 
   @override
   void initState() {
@@ -49,7 +49,7 @@ class UsuarioFormScreenState extends State<UsuarioFormScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return GenericFormScreen<Usuario, UsuarioController>(
+    return GenericFormScreen<User, UserController>(
       key: _formScreenKey,
       controller: controller,
       title: controller.title,
@@ -62,7 +62,7 @@ class UsuarioFormScreenState extends State<UsuarioFormScreen> {
             bundle.put("controller", controller);
             await Navigator.pushNamed(
               context,
-              Routes.changePasswordFormPage,
+              AppRoutes.changePasswordFormPage,
               arguments: bundle,
             );
             setState(() {});

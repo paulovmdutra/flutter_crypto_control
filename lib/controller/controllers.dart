@@ -1,2 +1,2 @@
 export 'controller.dart';
-export 'usuario_controller.dart';
+export 'user_controller.dart';

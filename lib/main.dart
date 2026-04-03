@@ -1,16 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_crypto_control/routes.dart';
+import 'package:flutter_crypto_control/core/app_config.dart';
+import 'package:flutter_crypto_control/core/routes.dart';
 import 'package:flutter_crypto_control/service_locator.dart';
-import 'package:flutter_crypto_control/theme.dart';
+import 'package:flutter_crypto_control/core/theme.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   final prefs = await SharedPreferences.getInstance();
+
   setupWidgets();
-  setupRepositories(mode: RepositoryMode.mock);
+
+  var mode = AppConfig.repositoryMode == "api"
+      ? RepositoryMode.api
+      : RepositoryMode.mock;
+
+  setupRepositories(mode: mode);
+
   setupControllers();
+
   runApp(ProviderScope(child: MainApp(prefs: prefs)));
 }
 
@@ -24,7 +34,7 @@ class MainApp extends ConsumerWidget {
     final theme = ref.watch(themeProvider);
     return MaterialApp(
       theme: theme,
-      routes: Routes.routes,
+      routes: AppRoutes.routes,
       debugShowCheckedModeBanner: false,
     );
   }

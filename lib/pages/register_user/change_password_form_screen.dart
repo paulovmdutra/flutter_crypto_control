@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_crypto_control/application/usecase/service_result.dart';
 import 'package:flutter_crypto_control/controller/controllers.dart';
-import 'package:flutter_crypto_control/domain/models/usuario.dart';
+import 'package:flutter_crypto_control/domain/models/user.dart';
 import 'package:flutter_crypto_control/pages/app/generic_form_screen.dart';
 import 'package:flutter_crypto_control/widgets/form_button.dart';
 import 'package:flutter_crypto_control/widgets/input_field.dart';
 import 'package:flutter_crypto_control/shared/utils/util.dart';
-
 
 class ChangePasswordFormScreen extends StatefulWidget {
   static const String routeName = '/changepassword_form_screen';
@@ -19,10 +18,10 @@ class ChangePasswordFormScreen extends StatefulWidget {
 }
 
 class ChangePasswordFormScreenState extends State<ChangePasswordFormScreen> {
-  UsuarioController controller = UsuarioController();
+  UserController controller = UserController();
 
-  final GlobalKey<GenericFormScreenState<Usuario, UsuarioController>>
-      _formScreenKey = GlobalKey();
+  final GlobalKey<GenericFormScreenState<User, UserController>> _formScreenKey =
+      GlobalKey();
 
   bool _obscurePassword = true;
   @override
@@ -35,7 +34,7 @@ class ChangePasswordFormScreenState extends State<ChangePasswordFormScreen> {
         throw Exception('Argumentos inválidos para formulário!');
       }
       final control = args.get("controller");
-      if (control is! UsuarioController) {
+      if (control is! UserController) {
         throw Exception('Controller inválido ou ausente no formulário!');
       }
 
@@ -50,7 +49,7 @@ class ChangePasswordFormScreenState extends State<ChangePasswordFormScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return GenericFormScreen<Usuario, UsuarioController>(
+    return GenericFormScreen<User, UserController>(
       key: _formScreenKey,
       controller: controller,
       title: controller.title,
@@ -72,18 +71,12 @@ class ChangePasswordFormScreenState extends State<ChangePasswordFormScreen> {
         spacer(.12),
         const Text(
           'Alterar senha,',
-          style: TextStyle(
-            fontSize: 28,
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
         ),
         spacer(.01),
         Text(
           'Informe a nova senha!',
-          style: TextStyle(
-            fontSize: 18,
-            color: Colors.black.withOpacity(.6),
-          ),
+          style: TextStyle(fontSize: 18, color: Colors.black.withOpacity(.6)),
         ),
         spacer(.12),
         InputFormField(

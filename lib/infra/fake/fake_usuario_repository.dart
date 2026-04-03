@@ -1,16 +1,16 @@
 import 'package:flutter_crypto_control/application/usecase/service_result.dart';
-import 'package:flutter_crypto_control/domain/models/usuario.dart';
+import 'package:flutter_crypto_control/domain/models/user.dart';
 import 'package:flutter_crypto_control/infra/fake/database_fake.dart';
 import 'package:flutter_crypto_control/infra/repositories/usuario_repository.dart';
 import 'package:flutter_crypto_control/shared/app_response_models.dart';
 import 'package:flutter_crypto_control/shared/utils/encrypt/encryption_context.dart';
 
 class FakeUsuarioRepository extends UsuarioRepository {
-  final List<Usuario> _usuarios = usuariosFake;
+  final List<User> _usuarios = usuariosFake;
   int _idCounter = usuariosFake.length;
 
   @override
-  Future<ServiceResult<int>> insert(Usuario entity) async {
+  Future<ServiceResult<int>> insert(User entity) async {
     await Future.delayed(const Duration(milliseconds: 500));
     final newEntity = entity.copyWith(id: _idCounter++);
 
@@ -27,13 +27,13 @@ class FakeUsuarioRepository extends UsuarioRepository {
     return ServiceResult(success: true, data: newEntity.id);
   }
 
-  Future<ServiceResult<int>> delete(Usuario entity) async {
+  Future<ServiceResult<int>> delete(User entity) async {
     await Future.delayed(const Duration(milliseconds: 400));
     _usuarios.removeWhere((u) => u.id == entity.id);
     return ServiceResult(success: true, data: 1);
   }
 
-  Future<ServiceResult<int>> update(Usuario entity) async {
+  Future<ServiceResult<int>> update(User entity) async {
     await Future.delayed(const Duration(milliseconds: 500));
     final index = _usuarios.indexWhere((u) => u.id == entity.id);
     if (index == -1) {
@@ -53,11 +53,11 @@ class FakeUsuarioRepository extends UsuarioRepository {
     return ServiceResult(success: true, data: 1);
   }
 
-  Future<ServiceResult<Usuario?>> findById(Usuario entity) async {
+  Future<ServiceResult<User?>> findById(User entity) async {
     await Future.delayed(const Duration(milliseconds: 300));
     final user = _usuarios.firstWhere(
       (u) => u.id == entity.id,
-      orElse: () => Usuario(id: -1),
+      orElse: () => User(id: -1),
     );
     if (user.id == -1) {
       return ServiceResult(success: false, message: 'Usuário não encontrado');
@@ -65,18 +65,18 @@ class FakeUsuarioRepository extends UsuarioRepository {
     return ServiceResult(success: true, data: user);
   }
 
-  Future<ServiceResult<List<Usuario>>> findAll(Usuario entity) async {
+  Future<ServiceResult<List<User>>> findAll(User entity) async {
     await Future.delayed(const Duration(milliseconds: 500));
     return ServiceResult(success: true, data: _usuarios);
   }
 
   @override
-  Future<ServiceResult<Usuario?>> login(String login, String senha) async {
+  Future<ServiceResult<User?>> login(String login, String senha) async {
     await Future.delayed(const Duration(milliseconds: 500));
 
     var user = _usuarios.firstWhere(
       (u) => u.login == login,
-      orElse: () => Usuario(id: -1),
+      orElse: () => User(id: -1),
     );
 
     if (user.id <= 0) {
@@ -89,7 +89,7 @@ class FakeUsuarioRepository extends UsuarioRepository {
 
     user = _usuarios.firstWhere(
       (u) => u.login == login && u.password == senha,
-      orElse: () => Usuario(id: -1),
+      orElse: () => User(id: -1),
     );
 
     if (user.id <= 0) {
@@ -100,41 +100,41 @@ class FakeUsuarioRepository extends UsuarioRepository {
   }
 
   @override
-  Future<CommonResult<Usuario?>> addAsync(Usuario entity) {
+  Future<CommonResult<User?>> addAsync(User entity) {
     // TODO: implement addAsync
     throw UnimplementedError();
   }
 
   @override
-  Future<CommonResult<Usuario?>> deleteAsync(Usuario entity) {
+  Future<CommonResult<User?>> deleteAsync(User entity) {
     // TODO: implement deleteAsync
     throw UnimplementedError();
   }
 
   @override
-  Future<CommonResult<List<Usuario>>> findByCondition(
-    bool Function(Usuario p1) predicate,
+  Future<CommonResult<List<User>>> findByCondition(
+    bool Function(User p1) predicate,
   ) {
     // TODO: implement findByCondition
     throw UnimplementedError();
   }
 
   @override
-  Future<CommonResult<Usuario?>> firstOrDefaultAsync(
-    bool Function(Usuario p1) predicate,
+  Future<CommonResult<User?>> firstOrDefaultAsync(
+    bool Function(User p1) predicate,
   ) {
     // TODO: implement firstOrDefaultAsync
     throw UnimplementedError();
   }
 
   @override
-  Future<CommonResult<List<Usuario>>> getAllAsync() {
+  Future<CommonResult<List<User>>> getAllAsync() {
     // TODO: implement getAllAsync
     throw UnimplementedError();
   }
 
   @override
-  Future<CommonResult<List<Usuario>>> getAllPaginateAsync({
+  Future<CommonResult<List<User>>> getAllPaginateAsync({
     int page = 1,
     int pageSize = 1000,
   }) {
@@ -143,17 +143,17 @@ class FakeUsuarioRepository extends UsuarioRepository {
   }
 
   @override
-  Future<CommonResult<Usuario?>> getByIdAsync(int id) {
+  Future<CommonResult<User?>> getByIdAsync(int id) {
     // TODO: implement getByIdAsync
     throw UnimplementedError();
   }
 
   @override
-  Future<CommonResult<Usuario?>> updateAsync(Usuario entity) {
+  Future<CommonResult<User?>> updateAsync(User entity) {
     // TODO: implement updateAsync
     throw UnimplementedError();
   }
-  
+
   @override
   Future<void> init() {
     // TODO: implement init

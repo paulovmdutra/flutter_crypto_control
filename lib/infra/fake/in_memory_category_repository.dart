@@ -14,6 +14,7 @@ class InMemoryCategoryRepository extends FakeRepository<Category> {
         type: TransactionType.income,
         colorValue: 0xFF4CAF50,
         iconCodePoint: Icons.work,
+        iconName: "work",
       ),
       Category(
         id: 2,
@@ -22,6 +23,7 @@ class InMemoryCategoryRepository extends FakeRepository<Category> {
         type: TransactionType.income,
         colorValue: 0xFF2196F3,
         iconCodePoint: Icons.trending_up,
+        iconName: "trending_up",
       ),
       Category(
         id: 3,
@@ -30,6 +32,7 @@ class InMemoryCategoryRepository extends FakeRepository<Category> {
         type: TransactionType.income,
         colorValue: 0xFFFFC107,
         iconCodePoint: Icons.star,
+        iconName: "star",
       ),
 
       // Despesas
@@ -40,6 +43,7 @@ class InMemoryCategoryRepository extends FakeRepository<Category> {
         type: TransactionType.expense,
         colorValue: 0xFFF44336,
         iconCodePoint: Icons.home,
+        iconName: "home",
       ),
       Category(
         id: 5,
@@ -48,6 +52,7 @@ class InMemoryCategoryRepository extends FakeRepository<Category> {
         type: TransactionType.expense,
         colorValue: 0xFFFF9800,
         iconCodePoint: Icons.restaurant,
+        iconName: "restaurant",
       ),
       Category(
         id: 6,
@@ -56,6 +61,7 @@ class InMemoryCategoryRepository extends FakeRepository<Category> {
         type: TransactionType.expense,
         colorValue: 0xFF673AB7,
         iconCodePoint: Icons.directions_bus,
+        iconName: "directions_bus",
       ),
       Category(
         id: 7,
@@ -64,6 +70,7 @@ class InMemoryCategoryRepository extends FakeRepository<Category> {
         type: TransactionType.expense,
         colorValue: 0xFFE91E63,
         iconCodePoint: Icons.health_and_safety,
+        iconName: "health_and_safety",
       ),
       Category(
         id: 8,
@@ -72,6 +79,7 @@ class InMemoryCategoryRepository extends FakeRepository<Category> {
         type: TransactionType.expense,
         colorValue: 0xFF00BCD4,
         iconCodePoint: Icons.movie,
+        iconName: "movie",
       ),
     ]);
   }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_crypto_control/authenticated.dart';
+import 'package:flutter_crypto_control/core/authenticated.dart';
 import 'package:flutter_crypto_control/pages/home/home_body.dart';
 import 'package:flutter_crypto_control/pages/home/home_navigation_bar.dart';
 import 'package:flutter_crypto_control/pages/category/category_page.dart';
@@ -9,7 +9,7 @@ import 'package:flutter_crypto_control/pages/subcategory/subcategory_page.dart';
 import 'package:flutter_crypto_control/pages/transaction/transaction_page.dart';
 import 'package:flutter_crypto_control/widgets/app_consumer_scaffold.dart';
 import 'package:flutter_crypto_control/widgets/dialog_widgets.dart';
-import 'package:flutter_crypto_control/routes.dart';
+import 'package:flutter_crypto_control/core/routes.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -38,7 +38,7 @@ class _HomePageState extends State<HomePage> {
     CategoryPage(title: "SubCategoria"),
   ];
 
-  String _selectedDrawerItem = Routes.searchUserPage;
+  String _selectedDrawerItem = AppRoutes.searchUserPage;
   int _currentIndexNavigationBar = 0;
 
   void _onSelectItem(String index) {
@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage> {
 
     if (!mounted) return;
     Navigator.pop(context);
-    Navigator.pushNamed(context, Routes.loginPage);
+    Navigator.pushNamed(context, AppRoutes.loginPage);
   }
 
   @override

@@ -3,7 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter_crypto_control/domain/models/entity.dart';
 
-class Usuario extends Entity<Usuario> {
+class User extends Entity<User> {
   String? nome;
   String? salt;
   String? password;
@@ -12,7 +12,7 @@ class Usuario extends Entity<Usuario> {
   DateTime? data;
   String? status;
   String? telefone;
-  Usuario({
+  User({
     super.id,
     this.nome,
     this.salt,
@@ -24,7 +24,7 @@ class Usuario extends Entity<Usuario> {
     this.telefone,
   });
 
-  Usuario copyWith({
+  User copyWith({
     int? id,
     String? nome,
     String? salt,
@@ -35,7 +35,7 @@ class Usuario extends Entity<Usuario> {
     String? status,
     String? telefone,
   }) {
-    return Usuario(
+    return User(
       id: id ?? this.id,
       nome: nome ?? this.nome,
       salt: salt ?? this.salt,
@@ -63,8 +63,8 @@ class Usuario extends Entity<Usuario> {
     };
   }
 
-  factory Usuario.fromMap(Map<String, dynamic> map) {
-    return Usuario(
+  factory User.fromMap(Map<String, dynamic> map) {
+    return User(
       id: map['id'] != null ? map['id'] as int : 0,
       nome: map['nome'] != null ? map['nome'] as String : null,
       salt: map['salt'] != null ? map['salt'] as String : null,
@@ -81,8 +81,8 @@ class Usuario extends Entity<Usuario> {
 
   String toJson() => json.encode(toMap());
 
-  factory Usuario.fromJson(String source) =>
-      Usuario.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory User.fromJson(String source) =>
+      User.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
@@ -90,7 +90,7 @@ class Usuario extends Entity<Usuario> {
   }
 
   @override
-  bool operator ==(covariant Usuario other) {
+  bool operator ==(covariant User other) {
     if (identical(this, other)) return true;
 
     return other.id == id &&
@@ -121,10 +121,10 @@ class Usuario extends Entity<Usuario> {
   String get entityName => "usuario";
 
   @override
-  Usuario fromMap(Map<String, dynamic> map) => Usuario.fromMap(map);
-  
+  User fromMap(Map<String, dynamic> map) => User.fromMap(map);
+
   @override
-  Usuario fromJson(String source) {
+  User fromJson(String source) {
     // TODO: implement fromJson
     throw UnimplementedError();
   }

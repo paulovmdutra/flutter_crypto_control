@@ -3,7 +3,7 @@ import 'package:flutter_crypto_control/domain/domain_services/interfaces/icrud_u
 import 'package:flutter_crypto_control/domain/domain_services/subCategory_usecase.dart';
 import 'package:flutter_crypto_control/domain/models/sub_category.dart';
 import 'package:flutter_crypto_control/domain/repositories/repository.dart';
-import 'package:flutter_crypto_control/exceptions.dart';
+import 'package:flutter_crypto_control/core/exceptions.dart';
 import 'package:flutter_crypto_control/service_locator.dart';
 import 'package:flutter_crypto_control/shared/app_response_models.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

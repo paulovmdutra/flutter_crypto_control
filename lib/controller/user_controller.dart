@@ -1,17 +1,17 @@
 import 'package:flutter_crypto_control/application/usecase/service_result.dart';
 import 'package:flutter_crypto_control/controller/controller.dart';
-import 'package:flutter_crypto_control/domain/models/usuario.dart';
+import 'package:flutter_crypto_control/domain/models/user.dart';
 import 'package:flutter_crypto_control/domain/domain_services/services.dart';
 import 'package:flutter_crypto_control/view_model/login_view_model.dart';
 import 'package:flutter_crypto_control/view_model/usuario_view_model.dart';
 import 'package:flutter_crypto_control/shared/utils/utils.dart' as util;
 
-class UsuarioController extends Controller<Usuario> {
+class UserController extends Controller<User> {
   LoginViewModel loginViewModel = LoginViewModel();
   UsuarioViewModel usuarioViewModel = UsuarioViewModel();
   final LoginDomainService _loginService = LoginDomainService();
 
-  Usuario? usuario;
+  User? usuario;
 
   @override
   Future<void> initialize() async {
@@ -25,7 +25,7 @@ class UsuarioController extends Controller<Usuario> {
   }
 
   Future<ServiceResult> signIn() async {
-    Usuario user = usuarioViewModel.toEntity();
+    User user = usuarioViewModel.toEntity();
     user.id = -1;
     final resultApplication = await _loginService.save(user);
     return resultApplication;
@@ -103,7 +103,7 @@ class UsuarioController extends Controller<Usuario> {
   }
 
   @override
-  void fromEntity(Usuario entity) {
+  void fromEntity(User entity) {
     usuario = entity;
     return usuarioViewModel.fromEntity(entity);
   }

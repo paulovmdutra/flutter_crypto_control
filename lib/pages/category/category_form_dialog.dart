@@ -63,6 +63,9 @@ class CategoryFormDialogState
       colorValue: colorValueNotifier.value,
       iconCodePoint: iconDataNotifier.value,
       archived: widget.entityToEdit?.archived ?? false,
+      iconName:
+          AppAvaliableIcons.getIconNameFromData(iconDataNotifier.value) ??
+          "help_outline",
     );
     return CommonResult.success(data: category);
   }

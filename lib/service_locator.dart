@@ -1,9 +1,9 @@
 import 'package:flutter_crypto_control/controller/controllers.dart';
 import 'package:flutter_crypto_control/domain/models/category.dart';
 import 'package:flutter_crypto_control/domain/models/sub_category.dart';
-import 'package:flutter_crypto_control/domain/models/usuario.dart';
+import 'package:flutter_crypto_control/domain/models/user.dart';
 import 'package:flutter_crypto_control/domain/repositories/repository.dart';
-import 'package:flutter_crypto_control/exceptions.dart';
+import 'package:flutter_crypto_control/core/exceptions.dart';
 import 'package:flutter_crypto_control/infra/api/api_repository.dart';
 import 'package:flutter_crypto_control/infra/fake/fake_usuario_repository.dart';
 import 'package:flutter_crypto_control/infra/fake/in_memory_category_repository.dart';
@@ -225,7 +225,7 @@ void initApiRepositories() {
 ///
 /// Ideal para uso em ambientes de desenvolvimento ou durante testes unitários.
 void initFakeRepositories() {
-  ServiceLocator.instance.registerSingleton<IRepository<Usuario>>(
+  ServiceLocator.instance.registerSingleton<IRepository<User>>(
     () => FakeUsuarioRepository(),
   );
   ServiceLocator.instance.registerSingleton<IRepository<Category>>(
@@ -258,8 +258,8 @@ void setupControllers() {
     () => UsuarioController(),
   );*/
 
-  ServiceLocator.instance.registerFactory<UsuarioController>(
-    () => UsuarioController(),
+  ServiceLocator.instance.registerFactory<UserController>(
+    () => UserController(),
   );
 }
 

@@ -1,6 +1,6 @@
 import 'package:flutter_crypto_control/application/usecase/service_result.dart';
-import 'package:flutter_crypto_control/authenticated.dart';
-import 'package:flutter_crypto_control/domain/models/usuario.dart';
+import 'package:flutter_crypto_control/core/authenticated.dart';
+import 'package:flutter_crypto_control/domain/models/user.dart';
 import 'package:flutter_crypto_control/infra/repositories/usuario_repository.dart';
 import 'package:flutter_crypto_control/service_locator.dart';
 import 'package:flutter_crypto_control/shared/utils/encrypt/encryption_context.dart';
@@ -14,7 +14,7 @@ class LoginDomainService {
   Authenticated authenticated = Authenticated();
 
   // Método para realizar o login
-  Future<ServiceResult> save(Usuario user) async {
+  Future<ServiceResult> save(User user) async {
     final resultApplication = ServiceResult();
     resultApplication.success = false;
 

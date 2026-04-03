@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_crypto_control/routes.dart';
+import 'package:flutter_crypto_control/core/routes.dart';
 
 class MenuItemWidget extends StatelessWidget {
   final String? title;
@@ -22,7 +22,7 @@ class MenuItemWidget extends StatelessWidget {
   GestureTapCallback? _onTap(BuildContext context) {
     return () async {
       // Verifica se a rota está definida na tabela de rotas
-      bool isValidRoute = Routes.routes.keys.contains(rota);
+      bool isValidRoute = AppRoutes.routes.keys.contains(rota);
       Navigator.pop(context);
 
       if (isValidRoute) {

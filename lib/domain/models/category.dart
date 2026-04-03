@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -13,6 +12,7 @@ class Category extends Entity<Category> {
   final IconData iconCodePoint;
   final bool? archived;
   final double? currentBalance;
+  final String iconName;
 
   Category({
     required super.id,
@@ -21,6 +21,7 @@ class Category extends Entity<Category> {
     required this.type,
     required this.colorValue,
     required this.iconCodePoint,
+    required this.iconName,
     this.currentBalance,
     this.archived = false,
   });
@@ -35,6 +36,7 @@ class Category extends Entity<Category> {
     IconData? iconCodePoint,
     bool? archived,
     double? currentBalance,
+    String? iconName,
   }) {
     return Category(
       id: id ?? this.id,
@@ -44,6 +46,7 @@ class Category extends Entity<Category> {
       iconCodePoint: iconCodePoint ?? this.iconCodePoint,
       archived: archived ?? this.archived,
       currentBalance: currentBalance ?? this.currentBalance,
+      iconName: iconName ?? this.iconName,
     );
   }
 
@@ -58,6 +61,7 @@ class Category extends Entity<Category> {
       'archived': archived,
       'currentBalance': currentBalance,
       'iconFontFamily': iconCodePoint.fontFamily,
+      'iconName': iconName,
     };
   }
 
@@ -71,6 +75,7 @@ class Category extends Entity<Category> {
       iconCodePoint: Icons.device_unknown,
       currentBalance: 0.0,
       archived: false,
+      iconName: "device_unknown",
     );
   }
 
@@ -83,15 +88,16 @@ class Category extends Entity<Category> {
           ? TransactionType.fromCode(map['type'])
           : TransactionType.unknown,
       colorValue: map['colorValue'] != null ? map['colorValue'] as int : 0,
-      archived: map['archived'] != map['archived']
-          ? map['archived'] as bool
-          : false,
+      archived: map['archived'] != null ? map['archived'] as bool : false,
       iconCodePoint: map['iconCodePoint'] != null
           ? IconData(map['iconCodePoint'] as int, fontFamily: 'MaterialIcons')
           : Icons.device_unknown,
       currentBalance: map['currentBalance'] != null
-          ? map['currentBalance'] as double
+          ? (map['currentBalance'] as num).toDouble()
           : 0.0,
+      iconName: map['iconName'] != null
+          ? map['iconName'] as String
+          : "device_unknown",
     );
   }
 
@@ -116,6 +122,7 @@ class Category extends Entity<Category> {
         other.colorValue == colorValue &&
         other.iconCodePoint == iconCodePoint &&
         other.currentBalance == currentBalance &&
+        other.iconName == iconName &&
         other.archived == archived;
   }
 

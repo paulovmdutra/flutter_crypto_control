@@ -1,7 +1,7 @@
 import 'package:flutter_crypto_control/domain/domain_services/interfaces/icrud_usecase.dart';
 import 'package:flutter_crypto_control/domain/models/entity.dart';
 import 'package:flutter_crypto_control/domain/repositories/repository.dart';
-import 'package:flutter_crypto_control/exceptions.dart';
+import 'package:flutter_crypto_control/core/exceptions.dart';
 import 'package:flutter_crypto_control/shared/app_response_models.dart';
 
 class UsecaseBase<T extends Entity<T>> implements ICrudUsecase<T> {

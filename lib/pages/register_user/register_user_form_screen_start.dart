@@ -3,8 +3,7 @@ import 'package:flutter_crypto_control/controller/controllers.dart';
 import 'package:flutter_crypto_control/pages/register_user/register_user_form_widget.dart';
 import 'package:flutter_crypto_control/service_locator.dart';
 
-class RegisterUserFormScreenStart extends StatefulWidget {  
-
+class RegisterUserFormScreenStart extends StatefulWidget {
   const RegisterUserFormScreenStart({super.key});
 
   @override
@@ -15,7 +14,8 @@ class RegisterUserFormScreenStart extends StatefulWidget {
 class _RegisterUserFormScreenStartState
     extends State<RegisterUserFormScreenStart>
     with TickerProviderStateMixin {
-  UsuarioController registerUserController = UsuarioController();/* ServiceLocator.instance.getService(
+  UserController registerUserController =
+      UserController(); /* ServiceLocator.instance.getService(
     ServiceKeys.controllerUser.name,
   );*/
 

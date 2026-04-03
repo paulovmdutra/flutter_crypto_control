@@ -5,7 +5,7 @@ import 'package:flutter_crypto_control/pages/login/login_screen.dart';
 import 'package:flutter_crypto_control/pages/subcategory/subcategory_page.dart';
 import 'package:flutter_crypto_control/widgets/app_scaffold.dart';
 
-class Routes {
+class AppRoutes {
   static String homePage = "/";
   static const String searchUserPage = '/search_user_page';
   static const String registerUserFormPage = '/register_user_form_page';

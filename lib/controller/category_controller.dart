@@ -82,9 +82,9 @@ class CategoryController extends AsyncNotifier<CommonResult<List<Category?>?>> {
         final updatedResult = CommonResult<List<Category?>>(data: updatedList);
 
         state = AsyncData(updatedResult);
+      } else {
+        state = AsyncError(result, StackTrace.current);
       }
-
-      state = AsyncError(result, StackTrace.current);
     } catch (e, st) {
       state = AsyncError(e, st);
     }

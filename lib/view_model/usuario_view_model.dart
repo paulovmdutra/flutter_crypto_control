@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_crypto_control/domain/models/usuario.dart';
-
+import 'package:flutter_crypto_control/domain/models/user.dart';
 
 class UsuarioViewModel {
   final TextEditingController nomeController = TextEditingController();
@@ -21,7 +20,7 @@ class UsuarioViewModel {
 
   UsuarioViewModel({this.id = 0});
 
-  void fromEntity(Usuario usuario) {
+  void fromEntity(User usuario) {
     id = usuario.id;
     nomeController.text = usuario.nome ?? '';
     saltController.text = usuario.salt ?? '';
@@ -34,8 +33,8 @@ class UsuarioViewModel {
     dataNotifier.value = usuario.data;
   }
 
-  Usuario toEntity() {
-    return Usuario(
+  User toEntity() {
+    return User(
       id: id!,
       nome: nomeController.text,
       salt: saltController.text,

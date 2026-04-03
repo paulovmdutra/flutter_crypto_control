@@ -1,11 +1,11 @@
-import 'package:flutter_crypto_control/domain/models/usuario.dart';
+import 'package:flutter_crypto_control/domain/models/user.dart';
 import 'package:flutter_crypto_control/shared/utils/encrypt/encryption_context.dart';
 
 EncryptionContext context = EncryptionContext();
 
 // Gera uma lista de usuários fakes
-List<Usuario> gerarUsuariosFakes(int quantidade) {
-  final usuarios = <Usuario>[];
+List<User> gerarUsuariosFakes(int quantidade) {
+  final usuarios = <User>[];
 
   for (int i = 0; i < quantidade; i++) {
     final nome = 'Usuário $i';
@@ -17,7 +17,7 @@ List<Usuario> gerarUsuariosFakes(int quantidade) {
 
     final result = context.encryptPassword(senhaOriginal);
 
-    final usuario = Usuario(
+    final usuario = User(
       id: i + 1,
       nome: nome,
       login: login,
@@ -35,4 +35,4 @@ List<Usuario> gerarUsuariosFakes(int quantidade) {
   return usuarios;
 }
 
-final List<Usuario> usuariosFake = gerarUsuariosFakes(20);
+final List<User> usuariosFake = gerarUsuariosFakes(20);

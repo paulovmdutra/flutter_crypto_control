@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_crypto_control/widgets/menu_item_widget.dart';
-import 'package:flutter_crypto_control/routes.dart';
+import 'package:flutter_crypto_control/core/routes.dart';
 
 class HomeNavigationDrawer extends StatelessWidget {
   String selectedIndex;
@@ -22,14 +22,14 @@ class HomeNavigationDrawer extends StatelessWidget {
   Widget _drawer(BuildContext context) {
     // Criando o mapa
     Map<String, Widget> drawerItems = {
-      Routes.homePage: DrawerHeader(child: _buildDrawerHeader(context)),
-      Routes.subCategoryPage: _buildMenuItem(
-        Routes.subCategoryPage,
+      AppRoutes.homePage: DrawerHeader(child: _buildDrawerHeader(context)),
+      AppRoutes.subCategoryPage: _buildMenuItem(
+        AppRoutes.subCategoryPage,
         "SubCategoria",
         Icons.abc,
       ),
-      Routes.categoryPage: _buildMenuItem(
-        Routes.categoryPage,
+      AppRoutes.categoryPage: _buildMenuItem(
+        AppRoutes.categoryPage,
         "Categoria",
         Icons.abc,
       ),

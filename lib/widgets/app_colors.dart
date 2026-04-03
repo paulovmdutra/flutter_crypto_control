@@ -479,4 +479,31 @@ class AppAvaliableIcons {
     Icons.phone_iphone,
     Icons.coffee,
   ];
+
+  static Icon getIcon(String name) {
+    return Icon(
+      availableIcons.firstWhere(
+        (icon) => icon.fontFamily == name,
+        orElse: () => Icons.help_outline, // Ícone padrão se não encontrado
+      ),
+    );
+  }
+
+  static String? getIconNameFromData(IconData iconData) {
+    for (var icon in availableIcons) {
+      if (icon.codePoint == iconData.codePoint) {
+        return icon.fontFamily; // Retorna o nome da fonte do ícone
+      }
+    }
+    return null; // Retorna null se o ícone não for encontrado
+  }
+
+  static String? getIconName(int codePoint) {
+    for (var icon in availableIcons) {
+      if (icon.codePoint == codePoint) {
+        return icon.fontFamily; // Retorna o nome da fonte do ícone
+      }
+    }
+    return null; // Retorna null se o ícone não for encontrado
+  }
 }

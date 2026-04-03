@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:flutter_crypto_control/exceptions.dart';
+import 'package:flutter_crypto_control/core/exceptions.dart';
 import 'package:intl/intl.dart';
 
 bool isMobile() {

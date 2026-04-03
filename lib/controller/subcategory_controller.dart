@@ -1,6 +1,6 @@
 import 'package:flutter_crypto_control/domain/domain_services/interfaces/icrud_usecase.dart';
 import 'package:flutter_crypto_control/domain/models/sub_category.dart';
-import 'package:flutter_crypto_control/exceptions.dart';
+import 'package:flutter_crypto_control/core/exceptions.dart';
 import 'package:flutter_crypto_control/pages/providers/subcategory_providers.dart';
 import 'package:flutter_crypto_control/shared/app_response_models.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
