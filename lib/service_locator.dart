@@ -191,7 +191,7 @@ enum ServiceKeys {
 /// Enum que define os modos disponíveis para configuração de repositórios.
 enum RepositoryMode {
   /// Utiliza repositórios fake/mock, geralmente usados para testes ou desenvolvimento inicial.
-  fake,
+  mock,
 
   /// Utiliza repositórios que fazem chamadas para uma API real.
   api,
@@ -276,7 +276,7 @@ void setupControllers() {
 /// [mode] O tipo de repositório a ser utilizado.
 void setupRepositories({required RepositoryMode mode}) {
   switch (mode) {
-    case RepositoryMode.fake:
+    case RepositoryMode.mock:
       initFakeRepositories();
       return;
     case RepositoryMode.api:

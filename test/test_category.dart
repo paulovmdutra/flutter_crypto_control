@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
   setupWidgets();
-  setupRepositories(mode: RepositoryMode.fake);
+  setupRepositories(mode: RepositoryMode.mock);
   setupControllers();
   runApp(const ProviderScope(child: TesteSubcategoryPage()));
 }
