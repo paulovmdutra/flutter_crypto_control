@@ -1,0 +1,49 @@
+name: flutter_crypto_control
+description: "A new Flutter project."
+publish_to: "none"
+version: 0.1.0
+
+environment:
+  sdk: ^3.10.0
+
+dependencies:
+  dtd: ^4.0.0
+  duration: ^4.0.3
+  encrypt: ^5.0.3
+  fl_chart: ^1.1.1
+  flutter:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  flutter_riverpod: ^3.0.3
+  flutter_svg: ^2.2.2
+  google_fonts: ^6.3.2
+  http: ^1.6.0
+  intl: ^0.20.2
+  json_rpc_2: ^4.0.0
+  logger: ^2.6.2
+  path: ^1.9.1
+  shared_preferences: ^2.5.3
+  stack_trace: ^1.12.1
+  url_launcher: ^6.3.2
+  uuid: ^4.5.2
+  web: ^1.1.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  custom_lint: ^0.8.1
+  riverpod_lint: ^3.0.3
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/icons/
+  fonts:
+    - family: Muli
+      fonts:
+        - asset: assets/fonts/muli/Muli.ttf
+        - asset: assets/fonts/muli/Muli-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/muli/Muli-Light.ttf
+          weight: 300
