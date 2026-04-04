@@ -23,7 +23,7 @@ class LoginDomainService {
       resultApplication.message = "Email e senha são obrigatórios.";
       return resultApplication;
     }
-    if (user.id <= 0) {
+    if (user.publicId == null || user.publicId!.isEmpty) {
       // Chama o repositório para autenticar o usuário
       await repository.addAsync(user);
     } else {

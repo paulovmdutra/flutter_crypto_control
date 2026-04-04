@@ -38,7 +38,6 @@ abstract class GenericStatefulForm<T> extends StatefulWidget {
 
   final List<Widget>? actionsButtons;
 
-  Widget? build(BuildContext context);
   void initState() {}
   void dispose() {}
 
@@ -112,7 +111,6 @@ class GenericStatefulFormState<TW extends GenericStatefulForm<T>, T>
       if (!mounted) return;
 
       showFeedback(result);
-
     } catch (e) {
       var result = CommonResult.fail(
         error: CommonError.general(),
@@ -208,9 +206,9 @@ class GenericStatefulFormState<TW extends GenericStatefulForm<T>, T>
               widget.onReload?.call();
             },
           ),
-        );  
-      },     
-      
+        );
+      },
+
       data: (data) {
         if (data.error != null) {
           final String titleText = widget.isEditing

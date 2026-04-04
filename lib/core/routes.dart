@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_crypto_control/pages/category/category_page.dart';
 import 'package:flutter_crypto_control/pages/home/home_page.dart';
 import 'package:flutter_crypto_control/pages/login/login_screen.dart';
-import 'package:flutter_crypto_control/pages/subcategory/subcategory_page.dart';
-import 'package:flutter_crypto_control/widgets/app_scaffold.dart';
 
 class AppRoutes {
   static String homePage = "/";
@@ -24,9 +22,9 @@ class AppRoutes {
     homePage: (context) => const HomePage(),
     loginPage: (context) => const LoginScreen(),
     categoryPage: (context) => CategoryPage(title: "Categoria"),
-    subCategoryPage: (context) => AppScaffold(
+    /*subCategoryPage: (context) => AppScaffold(
       title: "SubCategoria",
       body: SubCategoryPage(title: "SubCategoria"),
-    ),
+    ),*/
   };
 }

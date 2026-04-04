@@ -10,7 +10,6 @@ import 'package:flutter_crypto_control/infra/fake/in_memory_category_repository.
 import 'package:flutter_crypto_control/infra/fake/in_memory_sub_category.dart';
 import 'package:flutter_crypto_control/pages/category/riverpod/riverpod_factory.dart';
 import 'package:flutter_crypto_control/pages/ipages_factory.dart';
-import 'package:flutter_crypto_control/pages/subcategory/riverpod/riverpod_factory.dart';
 
 /// A classe `ServiceLocator` fornece um mecanismo centralizado para
 ///  registrar e recuperar serviços em uma aplicação.
@@ -35,75 +34,6 @@ import 'package:flutter_crypto_control/pages/subcategory/riverpod/riverpod_facto
 /// registramos um serviço com a chave "logger" e, em seguida,
 /// recuperamos esse serviço usando `getService`. Finalmente,
 /// utilizamos o serviço obtido para fazer um log de uma mensagem.
-/*class ServiceLocator {
-  // Instância única da classe (privada).
-  static final ServiceLocator _instance = ServiceLocator._internal();
-
-  // Construtor privado para impedir múltiplas instâncias.
-  ServiceLocator._internal();
-
-  // Getter público para acessar a instância única.
-  static ServiceLocator get instance => _instance;
-
-  /// Um mapa que mantém os serviços registrados, onde a chave é uma
-  /// String representando o nome do serviço e o valor é o próprio serviço.
-  final Map<String, dynamic> _singletons = {};
-  final Map<String, Function> _factories = {};
-
-  /// Registra um serviço com a chave especificada.
-  ///
-  /// O parâmetro [key] é a chave única que identifica o serviço.
-  ///
-  /// O parâmetro [service] é o próprio serviço a ser registrado.
-  void registerSingleton<T>(String key, T Function() service) {
-    if (_factories.containsKey(key)) {
-      throw ServiceException(
-        message: "Serviço com chave $key já foi registrado.",
-      );
-    }
-
-    _factories[key] = () {
-      if (!_singletons.containsKey(key)) {
-        _singletons[key] = service();
-      }
-      return _singletons[key];
-    };
-  }
-
-  void registerFactory<T>(String key, T Function() service) {
-    if (_factories.containsKey(key)) {
-      throw ServiceException(
-        message: "Serviço com chave '$key' já foi registrado.",
-      );
-    }
-    _factories[key] = service;
-  }
-
-  /// Recupera o serviço associado à chave especificada.
-  ///
-  /// Retorna o serviço correspondente à chave [key] fornecida,
-  /// ou [null] se nenhum serviço estiver registrado com essa chave.
-  dynamic getService(String key) {
-    final builder = _factories[key];
-    if (builder == null) {
-      throw ServiceException(
-        message:
-            "Serviço $key não registrado! Verifique a configuração do ServiceLocator.",
-      );
-    }
-    return builder();
-  }
-
-  /// Remove o tipo T do container (tanto singleton quanto factory)
-  void unregister(String key) {
-    _factories.remove(key);
-    _singletons.remove(key);
-  }
-
-  ///Verifica se o serviço foi registrado
-  bool isRegistered(String key) => _factories.containsKey(key);
-}*/
-
 class ServiceLocator {
   // Singleton boilerplate
   static final ServiceLocator _instance = ServiceLocator._internal();
@@ -289,11 +219,6 @@ void setupRepositories({required RepositoryMode mode}) {
 }
 
 void setupWidgets() {
-  // Registra a implementação do Riverpod sob a interface ISubCategoryFactory
-  ServiceLocator.instance.registerFactory<ISubCategoryFactory>(
-    () => RiverpodSubCategoryFactory(),
-  );
-
   // Registra a implementação do Riverpod sob a interface ISubCategoryFactory
   ServiceLocator.instance.registerFactory<ICategoryFactory>(
     () => RiverpodCategoryFactory(),

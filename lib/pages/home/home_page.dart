@@ -4,9 +4,6 @@ import 'package:flutter_crypto_control/pages/home/home_body.dart';
 import 'package:flutter_crypto_control/pages/home/home_navigation_bar.dart';
 import 'package:flutter_crypto_control/pages/category/category_page.dart';
 import 'package:flutter_crypto_control/pages/home/home_navigation_drawer.dart';
-import 'package:flutter_crypto_control/pages/home/transaction_page.dart';
-import 'package:flutter_crypto_control/pages/subcategory/subcategory_page.dart';
-import 'package:flutter_crypto_control/pages/transaction/transaction_page.dart';
 import 'package:flutter_crypto_control/widgets/app_consumer_scaffold.dart';
 import 'package:flutter_crypto_control/widgets/dialog_widgets.dart';
 import 'package:flutter_crypto_control/core/routes.dart';
@@ -22,21 +19,9 @@ class _HomePageState extends State<HomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final GlobalKey<_HomePageState> _widgetKey = GlobalKey<_HomePageState>();
 
-  final List<String> titles = const [
-    'Dashboard Financeiro',
-    'Transações',
-    'Investimentos',
-    'Patrimônio',
-    'SubCategorias',
-  ];
+  final List<String> titles = const ['Dashboard Financeiro', 'Categorias'];
 
-  final pages = const [
-    HomeBodyScreen(),
-    TransactionPageScreen(),
-    TransactionsPage(),
-    SubCategoryPage(title: "Categoria"),
-    CategoryPage(title: "SubCategoria"),
-  ];
+  final pages = const [HomeBodyScreen(), CategoryPage(title: "SubCategoria")];
 
   String _selectedDrawerItem = AppRoutes.searchUserPage;
   int _currentIndexNavigationBar = 0;

@@ -1,26 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_crypto_control/domain/models/category.dart';
 import 'package:flutter_crypto_control/pages/category/category_form_dialog.dart';
 import 'package:flutter_crypto_control/pages/providers/category_providers.dart';
 import 'package:flutter_crypto_control/shared/app_response_models.dart';
-import 'package:flutter_crypto_control/shared/view_async.dart';
+import 'package:flutter_crypto_control/view_model/category_view_model.dart';
 import 'package:flutter_crypto_control/widgets/app_scaffold.dart';
 import 'package:flutter_crypto_control/widgets/error_info_widget.dart';
 import 'package:flutter_crypto_control/widgets/waiting.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-extension AsyncValueExtensions<T> on AsyncValue<T> {
-  ViewAsync<T> toViewAsync() {
-    return when(
-      loading: () => ViewAsyncLoading<T>(),
-      error: (err, stack) => ViewAsyncError<T>(err, stack),
-      data: (data) => ViewAsyncData<T>(data),
-    );
-  }
-}
+import 'package:flutter_crypto_control/shared/extensions/async_value_extensions.dart';
 
 class FormWidgetAdapter extends ConsumerWidget {
-  final Category? category;
+  final CategoryViewModel? category;
 
   const FormWidgetAdapter({super.key, this.category});
 
@@ -30,23 +20,18 @@ class FormWidgetAdapter extends ConsumerWidget {
     final stateCategories = allCategoriesAsync.toViewAsync();
 
     // 2. Define a função de ação AQUI
-    Future<CommonResult<Category?>> handleSave(Category subCategory) async {
-      if (subCategory.id != 0) {
-        await ref
-            .read(categoryControllerProvider.notifier)
-            .updateCategory(subCategory);
-      } else {
-        await ref
-            .read(categoryControllerProvider.notifier)
-            .addCategory(subCategory);
-      }
-      return CommonResult<Category?>.success(data: category);
+    Future<CommonResult<CategoryViewModel?>> handleSave(
+      CategoryViewModel categoryData,
+    ) async {
+      await ref.read(categoryControllerProvider.notifier).save(categoryData);
+      return CommonResult<CategoryViewModel?>.success(data: categoryData);
     }
-
+    
     return stateCategories.when(
       loading: () => const WaitingWidget(),
       error: (error, stackTrace) {
-        CommonResult<Category?> result = error as CommonResult<Category?>;
+        CommonResult<CategoryViewModel?> result =
+            error as CommonResult<CategoryViewModel?>;
         return AppScaffold(
           title: 'Categoria',
           body: ErrorInfoWidget(
@@ -54,7 +39,7 @@ class FormWidgetAdapter extends ConsumerWidget {
               result.error?.details ?? 'Erro desconhecido',
             ),
             onReload: () {
-              ref.read(categoryControllerProvider.notifier).loadCategories();
+              ref.read(categoryControllerProvider.notifier).loadData();
             },
           ),
         );
@@ -67,7 +52,7 @@ class FormWidgetAdapter extends ConsumerWidget {
             return await handleSave(data!.data!);
           },
           onReload: () {
-            ref.read(categoryControllerProvider.notifier).loadCategories();
+            ref.read(categoryControllerProvider.notifier).loadData();
           },
         );
       },

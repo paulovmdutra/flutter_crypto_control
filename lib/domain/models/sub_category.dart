@@ -6,19 +6,19 @@ import 'package:flutter_crypto_control/domain/models/entity.dart';
 class SubCategory extends Entity<SubCategory> {
   final String name;
   final int colorValue;
-  final IconData iconCodePoint;
+  final String iconName;
   final int categoryId;
   final double? currentBalance;
   final bool? archived;
   final Category? category;
 
   SubCategory({
-    required super.id,
+    super.id,
     super.publicId,
     required this.name,
     required this.categoryId,
     required this.colorValue,
-    required this.iconCodePoint,
+    required this.iconName,
     this.currentBalance,
     this.category,
     this.archived,
@@ -48,19 +48,20 @@ class SubCategory extends Entity<SubCategory> {
       category: category ?? this.category,
       name: name ?? this.name,
       colorValue: colorValue ?? this.colorValue,
-      iconCodePoint: iconCodePoint ?? this.iconCodePoint,
+      iconName: iconName,
       currentBalance: currentBalance ?? this.currentBalance,
       archived: archived ?? this.archived,
     );
   }
 
+  @override
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
       'name': name,
       'categoryId': categoryId,
       'colorValue': colorValue,
-      'iconCodePoint': iconCodePoint.codePoint,
+      'iconName': iconName,
       'currentBalance': currentBalance,
       'archived': archived,
     };
@@ -76,18 +77,15 @@ class SubCategory extends Entity<SubCategory> {
       currentBalance: map['currentBalance'] != null
           ? map['currentBalance'] as double
           : 0,
-      archived: map['archived'] != map['archived']
-          ? map['archived'] as bool
-          : false,
-      iconCodePoint: map['iconCodePoint'] != null
-          ? IconData(map['iconCodePoint'] as int, fontFamily: 'MaterialIcons')
-          : Icons.device_unknown,
+      archived: map['archived'] != null ? map['archived'] as bool : false,
+      iconName: map['iconName'] != null ? map['iconName'] as String : "",
       category: map["category"] != null
           ? Category.fromJson(map["category"])
           : Category.createEmpty(),
     );
   }
 
+  @override
   String toJson() => json.encode(toMap());
 
   factory SubCategory.fromJson(String source) =>
@@ -95,7 +93,7 @@ class SubCategory extends Entity<SubCategory> {
 
   @override
   String toString() {
-    return 'SubCategory(id: $id, name: $name, categoryId: $categoryId, colorValue: $colorValue, iconCodePoint: $iconCodePoint)';
+    return 'SubCategory(id: $id, name: $name, categoryId: $categoryId, colorValue: $colorValue, iconName: $iconName, currentBalance: $currentBalance, archived: $archived, category: $category)';
   }
 
   @override
@@ -107,7 +105,8 @@ class SubCategory extends Entity<SubCategory> {
         other.categoryId == categoryId &&
         other.currentBalance == currentBalance &&
         other.colorValue == colorValue &&
-        other.iconCodePoint == iconCodePoint;
+        other.iconName == iconName &&
+        other.archived == archived;
   }
 
   @override
@@ -117,7 +116,8 @@ class SubCategory extends Entity<SubCategory> {
         categoryId.hashCode ^
         currentBalance.hashCode ^
         colorValue.hashCode ^
-        iconCodePoint.hashCode;
+        iconName.hashCode ^
+        archived.hashCode;
   }
 
   @override
@@ -130,7 +130,6 @@ class SubCategory extends Entity<SubCategory> {
 
   @override
   SubCategory fromJson(String source) {
-    // TODO: implement fromJson
-    throw UnimplementedError();
+    return SubCategory.fromJson(source);
   }
 }

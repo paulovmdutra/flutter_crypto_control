@@ -47,6 +47,21 @@ class LoginValidationRule implements ValidationRule {
   }
 }
 
+/// Estratégia para validação de Senha
+class RequiredFieldValidationRule implements ValidationRule {
+  final String fieldName;
+
+  RequiredFieldValidationRule(this.fieldName);
+
+  @override
+  ValidationResult validate(value) {
+    if (value == null || value.isEmpty) {
+      return ValidationResult.failure('O campo $fieldName é obrigatório.');
+    }
+    return ValidationResult.success();
+  }
+}
+
 /// O Contexto que usa a estratégia de validação.
 class ValidatorContext {
   ValidationRule _strategy;

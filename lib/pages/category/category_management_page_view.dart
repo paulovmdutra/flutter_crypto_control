@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_crypto_control/domain/models/category.dart';
 import 'package:flutter_crypto_control/pages/app/generic_form/generic_management_page_view.dart';
 import 'package:flutter_crypto_control/pages/ipages_factory.dart';
 import 'package:flutter_crypto_control/pages/models_page.dart';
 import 'package:flutter_crypto_control/service_locator.dart';
 import 'package:flutter_crypto_control/shared/app_response_models.dart';
+import 'package:flutter_crypto_control/view_model/category_view_model.dart';
 import 'package:flutter_crypto_control/widgets/app_colors.dart';
 
 class CategoryManagementPage
-    extends GenericManagementPageView<Category, CategoryModel> {
+    extends GenericManagementPageView<CategoryViewModel, CategoryModel> {
   const CategoryManagementPage({
     super.key,
     required super.state,
@@ -20,12 +20,12 @@ class CategoryManagementPage
   @override
   Widget? builderContainer(
     BuildContext context,
-    CommonResult<List<Category?>?> data,
+    CommonResult<List<CategoryViewModel?>?> data,
   ) {
     return _list(context, data);
   }
 
-  Widget _cardInfo(BuildContext context, List<Category?> categories) {
+  Widget _cardInfo(BuildContext context, List<CategoryViewModel?> categories) {
     return Card(
       elevation: 4,
       child: ListTile(
@@ -43,7 +43,10 @@ class CategoryManagementPage
     );
   }
 
-  Widget _list(BuildContext context, CommonResult<List<Category?>?> categories) {
+  Widget _list(
+    BuildContext context,
+    CommonResult<List<CategoryViewModel?>?> categories,
+  ) {
     return Column(
       children: [
         Row(

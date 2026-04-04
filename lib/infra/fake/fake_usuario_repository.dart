@@ -79,7 +79,7 @@ class FakeUsuarioRepository extends UsuarioRepository {
       orElse: () => User(id: -1),
     );
 
-    if (user.id <= 0) {
+    if (user.publicId == null || user.publicId!.isEmpty) {
       return ServiceResult(success: false, message: 'Usuário não encontrado!');
     }
 
@@ -92,7 +92,7 @@ class FakeUsuarioRepository extends UsuarioRepository {
       orElse: () => User(id: -1),
     );
 
-    if (user.id <= 0) {
+    if (user.publicId == null || user.publicId!.isEmpty) {
       return ServiceResult(success: false, message: 'Login ou senha inválidos');
     }
 

@@ -1,5 +1,15 @@
 # Flutter Crypto Control - Estratégia de Desenvolvimento
 
+## Perfil e Tom de Voz
+
+- Identidade: Atue como um Consultor Sênior e Especialista em Tecnologia.
+
+- Estilo: Direto, pragmático e focado em soluções. Evite introduções como "Certamente!" ou "Como um modelo de linguagem...".
+
+- Comunicação: Use Português do Brasil de forma clara. Se um termo técnico for mais comum em Inglês, mantenha o termo original.
+
+- Nível de Detalhe: Se a solução for simples, responda de forma curta. Se for complexa, use uma abordagem passo a passo.
+
 ## Visão Geral do Projeto
 
 Aplicação Flutter para controle financeiro e criptomoedas, estruturada com arquitetura limpa e separação de responsabilidades.
@@ -28,6 +38,8 @@ O projeto segue uma arquitetura em camadas inspirada em Clean Architecture e MVC
 ```
 lib/
 ├── controller/          # Controladores (lógica de aplicação)
+│   ├── riverpod/          # Controladores que utilizam o riverpod
+├── core/                # Núcleo com classes gerais pela aplicação
 ├── domain/              # Camada de domínio (regras de negócio)
 │   ├── models/          # Entidades e modelos
 │   ├── repositories/    # Interfaces dos repositórios
@@ -45,6 +57,12 @@ lib/
 ├── view_model/          # ViewModels para estado da UI
 └── widgets/             # Widgets reutilizáveis
 ```
+
+### Regras de Dependência
+
+- **Importante:** A camada domain nunca deve importar nada de infra ou pages. Respeite o fluxo de dependência da Clean Architecture. A camada `domain` deve ser totalmente independente. Nunca importe nada de `infra`, `pages` ou `application` para dentro de `domain`.
+
+- **Importante:** Siga a risca a Clean Architecture.
 
 ## Padrões de Design
 
@@ -113,6 +131,11 @@ final themeProvider = StateNotifierProvider<ThemeController, ThemeData>((ref) {
 });
 ```
 
+### Preferência de UI
+
+- Sempre que possível, utilize `ConsumerWidget` em vez de `StatefulWidget` para garantir a reatividade com Riverpod de forma nativa e limpa.
+- Sempre que possível, mantenha a separação clara da UI pura de integração com Riverpod. O objetivo é permtir trocar de framework caso haja necessidade no futuro.
+
 ### ViewModels
 
 ViewModels seguem o padrão `EntityViewModel<T>` para estado de formulários e telas.
@@ -159,6 +182,25 @@ O projeto possui páginas genéricas para operações CRUD:
 ### Factory de Páginas
 
 Interfaces `IPageFactory` permitem troca de implementações (ex: Riverpod) sem acoplamento.
+
+## Padronização de Novos Cadastros (C.R.U.D.)
+
+Sempre que a necessidade de criar um novo fluxo de cadastro (Telas, Formulários e Controles) surgir, a padronização a seguir DEVE ser adotada para evitar duplicação de lógicas de estado e proteger a UI do desacoplamento:
+
+1. **Separação UI vs Adapters (Riverpod):**
+   - Nenhuma tela (`Page`, `ListView` ou `Form`) dentro do pacote visual do cadastro pode importar diretamente o `flutter_riverpod`.
+   - Elas devem comunicar o seu estado reativo consumindo variáveis envelopadas pela abstração nativa `ViewAsync<T>`.
+
+2. **Criação de Adapters Direcionados:**
+   - Em uma sub-pasta `riverpod/`, devem ser construídos arquivos *Adapters*. Eles sim escutarão os *Providers* (ex: `ref.watch`) e converterão o modelo padrão usando a extensão unificada `toViewAsync()`.
+   - Use conectores pré-fabricados para abstrair tratamentos isolados de erros e loadings da UI do formulário (reduzindo a verborragia nos Adapters).
+
+3. **Injeção de Dependências Exclusiva por Factory:**
+   - Não referencie Modal/Dialog de formulários dentro do código de Listagem.
+   - Os Adapters devem invocar componentes adjacentes por meio de solicitações via Interface Factory instanciada através do `ServiceLocator` (Ex: `ServiceLocator.instance.get<ICategoryFactory>().createForm()`).
+
+4. **Gerenciadores de Estado (Controllers) Estéreis:**
+   - Utilize a classe base abstrata `CrudAsyncNotifier` na construção de novos controladores no Riverpod, sobrecarregando apenas propriedades de conversões (`DTOs/ViewModels` para `Entities`), mitigando a reimplementação infinita dos cenários try-catch de Adição, Edição e Exclusão.
 
 ## Temas
 

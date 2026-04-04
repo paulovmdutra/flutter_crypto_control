@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
-
 import 'package:flutter_crypto_control/domain/models/entity.dart';
 import 'package:flutter_crypto_control/domain/models/transaction.dart';
 
@@ -9,31 +7,26 @@ class Category extends Entity<Category> {
   final String name;
   final TransactionType type;
   final int colorValue;
-  final IconData iconCodePoint;
   final bool? archived;
   final double? currentBalance;
   final String iconName;
 
   Category({
-    required super.id,
+    super.id,
     super.publicId,
     required this.name,
     required this.type,
     required this.colorValue,
-    required this.iconCodePoint,
     required this.iconName,
     this.currentBalance,
     this.archived = false,
   });
-
-  Color get color => Color(colorValue);
 
   Category copyWith({
     int? id,
     String? name,
     TransactionType? type,
     int? colorValue,
-    IconData? iconCodePoint,
     bool? archived,
     double? currentBalance,
     String? iconName,
@@ -43,7 +36,6 @@ class Category extends Entity<Category> {
       name: name ?? this.name,
       type: type ?? this.type,
       colorValue: colorValue ?? this.colorValue,
-      iconCodePoint: iconCodePoint ?? this.iconCodePoint,
       archived: archived ?? this.archived,
       currentBalance: currentBalance ?? this.currentBalance,
       iconName: iconName ?? this.iconName,
@@ -57,10 +49,8 @@ class Category extends Entity<Category> {
       'name': name,
       'type': TransactionType.toCode(type),
       'colorValue': colorValue,
-      'iconCodePoint': iconCodePoint.codePoint,
       'archived': archived,
       'currentBalance': currentBalance,
-      'iconFontFamily': iconCodePoint.fontFamily,
       'iconName': iconName,
     };
   }
@@ -72,7 +62,6 @@ class Category extends Entity<Category> {
       name: "Nenhuma categoria cadastrada",
       type: TransactionType.expense,
       colorValue: 0,
-      iconCodePoint: Icons.device_unknown,
       currentBalance: 0.0,
       archived: false,
       iconName: "device_unknown",
@@ -89,9 +78,6 @@ class Category extends Entity<Category> {
           : TransactionType.unknown,
       colorValue: map['colorValue'] != null ? map['colorValue'] as int : 0,
       archived: map['archived'] != null ? map['archived'] as bool : false,
-      iconCodePoint: map['iconCodePoint'] != null
-          ? IconData(map['iconCodePoint'] as int, fontFamily: 'MaterialIcons')
-          : Icons.device_unknown,
       currentBalance: map['currentBalance'] != null
           ? (map['currentBalance'] as num).toDouble()
           : 0.0,
@@ -109,7 +95,7 @@ class Category extends Entity<Category> {
 
   @override
   String toString() {
-    return 'Category(id: $id, name: $name, type: $type, colorValue: $colorValue, iconCodePoint: $iconCodePoint)';
+    return 'Category(id: $id, name: $name, type: $type, colorValue: $colorValue, archived: $archived, currentBalance: $currentBalance, iconName: $iconName)';
   }
 
   @override
@@ -120,7 +106,6 @@ class Category extends Entity<Category> {
         other.name == name &&
         other.type == type &&
         other.colorValue == colorValue &&
-        other.iconCodePoint == iconCodePoint &&
         other.currentBalance == currentBalance &&
         other.iconName == iconName &&
         other.archived == archived;
@@ -132,8 +117,8 @@ class Category extends Entity<Category> {
         name.hashCode ^
         type.hashCode ^
         colorValue.hashCode ^
-        iconCodePoint.hashCode ^
         currentBalance.hashCode ^
+        iconName.hashCode ^
         archived.hashCode;
   }
 

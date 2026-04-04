@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_crypto_control/domain/models/category.dart';
 import 'package:flutter_crypto_control/domain/models/transaction.dart';
 import 'package:flutter_crypto_control/infra/fake/fake_repository.dart';
@@ -13,7 +12,6 @@ class InMemoryCategoryRepository extends FakeRepository<Category> {
         name: 'Salário',
         type: TransactionType.income,
         colorValue: 0xFF4CAF50,
-        iconCodePoint: Icons.work,
         iconName: "work",
       ),
       Category(
@@ -22,7 +20,6 @@ class InMemoryCategoryRepository extends FakeRepository<Category> {
         name: 'Investimentos',
         type: TransactionType.income,
         colorValue: 0xFF2196F3,
-        iconCodePoint: Icons.trending_up,
         iconName: "trending_up",
       ),
       Category(
@@ -31,7 +28,6 @@ class InMemoryCategoryRepository extends FakeRepository<Category> {
         name: 'Extra',
         type: TransactionType.income,
         colorValue: 0xFFFFC107,
-        iconCodePoint: Icons.star,
         iconName: "star",
       ),
 
@@ -42,7 +38,6 @@ class InMemoryCategoryRepository extends FakeRepository<Category> {
         name: 'Moradia',
         type: TransactionType.expense,
         colorValue: 0xFFF44336,
-        iconCodePoint: Icons.home,
         iconName: "home",
       ),
       Category(
@@ -51,7 +46,6 @@ class InMemoryCategoryRepository extends FakeRepository<Category> {
         name: 'Alimentação',
         type: TransactionType.expense,
         colorValue: 0xFFFF9800,
-        iconCodePoint: Icons.restaurant,
         iconName: "restaurant",
       ),
       Category(
@@ -60,7 +54,6 @@ class InMemoryCategoryRepository extends FakeRepository<Category> {
         name: 'Transporte',
         type: TransactionType.expense,
         colorValue: 0xFF673AB7,
-        iconCodePoint: Icons.directions_bus,
         iconName: "directions_bus",
       ),
       Category(
@@ -69,7 +62,6 @@ class InMemoryCategoryRepository extends FakeRepository<Category> {
         name: 'Saúde',
         type: TransactionType.expense,
         colorValue: 0xFFE91E63,
-        iconCodePoint: Icons.health_and_safety,
         iconName: "health_and_safety",
       ),
       Category(
@@ -78,7 +70,6 @@ class InMemoryCategoryRepository extends FakeRepository<Category> {
         name: 'Lazer',
         type: TransactionType.expense,
         colorValue: 0xFF00BCD4,
-        iconCodePoint: Icons.movie,
         iconName: "movie",
       ),
     ]);

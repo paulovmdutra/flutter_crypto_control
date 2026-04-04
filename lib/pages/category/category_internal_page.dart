@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_crypto_control/domain/models/category.dart';
 import 'package:flutter_crypto_control/pages/category/category_management_page_view.dart';
 import 'package:flutter_crypto_control/pages/models_page.dart';
 import 'package:flutter_crypto_control/shared/app_response_models.dart';
 import 'package:flutter_crypto_control/shared/view_async.dart';
+import 'package:flutter_crypto_control/view_model/category_view_model.dart';
 import 'package:flutter_crypto_control/widgets/app_colors.dart';
 import 'package:flutter_crypto_control/widgets/widgets.dart';
 
 class CategoryInternalPage extends StatelessWidget {
   // Injetar o estado (dados)
-  final ViewAsync<CommonResult<List<Category?>?>> state;
+  final ViewAsync<CommonResult<List<CategoryViewModel?>?>> state;
 
   // Injetar as funções de ação (callbacks)
   final VoidCallback onAddCategory;

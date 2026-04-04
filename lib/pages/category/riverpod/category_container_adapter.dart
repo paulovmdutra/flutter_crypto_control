@@ -4,18 +4,8 @@ import 'package:flutter_crypto_control/pages/ipages_factory.dart';
 import 'package:flutter_crypto_control/pages/models_page.dart';
 import 'package:flutter_crypto_control/pages/providers/category_providers.dart';
 import 'package:flutter_crypto_control/service_locator.dart';
-import 'package:flutter_crypto_control/shared/view_async.dart';
+import 'package:flutter_crypto_control/shared/extensions/async_value_extensions.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-extension AsyncValueExtensions<T> on AsyncValue<T> {
-  ViewAsync<T> toViewAsync() {
-    return when(
-      loading: () => ViewAsyncLoading<T>(),
-      error: (err, stack) => ViewAsyncError<T>(err, stack),
-      data: (data) => ViewAsyncData<T>(data),
-    );
-  }
-}
 
 class CategoryContainerAdapter extends ConsumerWidget {
   const CategoryContainerAdapter({super.key});
@@ -32,7 +22,7 @@ class CategoryContainerAdapter extends ConsumerWidget {
 
     // Ação de Recarregar
     final VoidCallback onReload = () {
-      ref.read(categoryControllerProvider.notifier).loadCategories();
+      ref.read(categoryControllerProvider.notifier).loadData();
     };
 
     // Ação de Adicionar (inclui a navegação e a lógica do form)

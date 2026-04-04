@@ -1,13 +1,13 @@
-import 'package:flutter_crypto_control/controller/category_controller.dart';
+import 'package:flutter_crypto_control/controller/riverpod/category_controller.dart';
 import 'package:flutter_crypto_control/domain/domain_services/category_usecase.dart';
 import 'package:flutter_crypto_control/domain/domain_services/interfaces/icrud_usecase.dart';
 import 'package:flutter_crypto_control/domain/models/category.dart';
 import 'package:flutter_crypto_control/domain/models/transaction.dart';
-import 'package:flutter_crypto_control/domain/repositories/icategoryrepository.dart';
 import 'package:flutter_crypto_control/domain/repositories/repository.dart';
 import 'package:flutter_crypto_control/infra/fake/in_memory_transaction_repository.dart';
 import 'package:flutter_crypto_control/service_locator.dart';
 import 'package:flutter_crypto_control/shared/app_response_models.dart';
+import 'package:flutter_crypto_control/view_model/category_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// Provider global do repositório de transações
@@ -31,29 +31,34 @@ final categoryUsecaseProvider = FutureProvider<ICrudUsecase<Category>>((
 });
 
 final categoryControllerProvider =
-    AsyncNotifierProvider<CategoryController, CommonResult<List<Category?>?>>(
-      CategoryController.new,
-    );
+    AsyncNotifierProvider<
+      CategoryController,
+      CommonResult<List<CategoryViewModel?>?>
+    >(CategoryController.new);
 
 // 4. SELECTOR: Dados filtrados para Receita (Remove a lógica de filtragem da UI)
-final incomeCategoriesProvider = FutureProvider<List<Category?>>((ref) async {
+final incomeCategoriesProvider = FutureProvider<List<CategoryViewModel?>>((
+  ref,
+) async {
   // Observa o estado total do Controller
   final categories = ref.watch(categoryControllerProvider);
   return categories.when(
     data: (list) =>
         list.data!.where((c) => c!.type == TransactionType.income).toList(),
-    loading: () => List<Category?>() = [],
-    error: (e, _) => List<Category?>() = [],
+    loading: () => List<CategoryViewModel?>() = [],
+    error: (e, _) => List<CategoryViewModel?>() = [],
   );
 });
 
 // 5. SELECTOR: Dados filtrados para Despesa (Remove a lógica de filtragem da UI)
-final expenseCategoriesProvider = FutureProvider<List<Category?>>((ref) async {
+final expenseCategoriesProvider = FutureProvider<List<CategoryViewModel?>>((
+  ref,
+) async {
   final categories = ref.watch(categoryControllerProvider);
   return categories.when(
     data: (list) =>
         list.data!.where((c) => c!.type == TransactionType.expense).toList(),
-    loading: () => List<Category?>() = [],
-    error: (e, _) => List<Category?>() = [],
+    loading: () => List<CategoryViewModel?>() = [],
+    error: (e, _) => List<CategoryViewModel?>() = [],
   );
 });

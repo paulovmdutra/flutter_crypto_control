@@ -12,7 +12,7 @@ class FakeRepository<T extends Entity<T>> extends IRepository<T> {
   Future<CommonResult<T?>> addAsync(T entity) async {
     await Future.delayed(const Duration(milliseconds: 500)); // Simula latência
     idCounter = fakeData.length + 1;
-    entity.id = idCounter;
+    entity.publicId = 'public_$idCounter';
     fakeData.add(entity);
     return CommonResult.success(data: entity);
   }
@@ -21,7 +21,7 @@ class FakeRepository<T extends Entity<T>> extends IRepository<T> {
   Future<CommonResult<T?>> deleteAsync(T entity) async {
     await Future.delayed(const Duration(milliseconds: 500));
     var data = fakeData.firstWhere(
-      (u) => u!.id == entity.id,
+      (u) => u!.publicId == entity.publicId,
       orElse: () => null,
     );
     if (data == null) return CommonResult.fail(error: CommonError.notFound());
@@ -31,7 +31,7 @@ class FakeRepository<T extends Entity<T>> extends IRepository<T> {
   @override
   Future<CommonResult<T?>> updateAsync(T entity) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    final index = fakeData.indexWhere((u) => u!.id == entity.id);
+    final index = fakeData.indexWhere((u) => u!.publicId == entity.publicId);
     if (index == -1) {
       return CommonResult.fail(error: CommonError.notFound());
     }

@@ -63,7 +63,11 @@ class SubCategoryController
 
         state = AsyncData(resultList);
       } else {
-        state = AsyncError(result.error!, StackTrace.current);
+        var errorMessage = "Failed to delete subcategory";
+        if (result.error != null) {
+          errorMessage = result.error!.message;
+        }
+        state = AsyncError(errorMessage, StackTrace.current);
       }
     } catch (e, st) {
       state = AsyncError(e, st);

@@ -1,5 +1,4 @@
 abstract class Entity<T extends Entity<T>> {
-  
   int id;
 
   String? publicId;

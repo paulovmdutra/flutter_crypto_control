@@ -39,7 +39,6 @@ class InMemoryTransactionRepository extends FakeRepository<Transaction> {
       name: 'Salário',
       type: TransactionType.income,
       colorValue: 0xFF4CAF50,
-      iconCodePoint: Icons.work,
       iconName: "work",
     );
     final Category _mockCatFood = Category(
@@ -48,7 +47,6 @@ class InMemoryTransactionRepository extends FakeRepository<Transaction> {
       name: 'Alimentação',
       type: TransactionType.expense,
       colorValue: 0xFFFF9800,
-      iconCodePoint: Icons.restaurant,
       iconName: "restaurant",
     );
     final Category _mockCatHousing = Category(
@@ -57,7 +55,6 @@ class InMemoryTransactionRepository extends FakeRepository<Transaction> {
       name: 'Moradia',
       type: TransactionType.expense,
       colorValue: 0xFFF44336,
-      iconCodePoint: Icons.home,
       iconName: "home",
     );
 

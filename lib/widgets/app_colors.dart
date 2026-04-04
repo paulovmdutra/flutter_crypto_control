@@ -480,6 +480,44 @@ class AppAvaliableIcons {
     Icons.coffee,
   ];
 
+  static final Map<String, IconData> iconNameMap = {
+    'money_off': Icons.money_off,
+    'money': Icons.money,
+    'shopping_bag': Icons.shopping_bag,
+    'shopping_cart': Icons.shopping_cart,
+    'restaurant': Icons.restaurant,
+    'home': Icons.home,
+    'work': Icons.work,
+    'school': Icons.school,
+    'directions_bus': Icons.directions_bus,
+    'health_and_safety': Icons.health_and_safety,
+    'movie': Icons.movie,
+    'star': Icons.star,
+    'savings': Icons.savings,
+    'pets': Icons.pets,
+    'fitness_center': Icons.fitness_center,
+    'travel_explore': Icons.travel_explore,
+    'music_note': Icons.music_note,
+    'local_gas_station': Icons.local_gas_station,
+    'phone_iphone': Icons.phone_iphone,
+    'coffee': Icons.coffee,
+  };
+
+  static IconData getIconDataByName(String name) {
+    return iconNameMap[name] ??
+        Icons
+            .help_outline; // Retorna um ícone padrão se o nome não for encontrado
+  }
+
+  static String getIconName(IconData iconData) {
+    return iconNameMap.entries
+        .firstWhere(
+          (entry) => entry.value.codePoint == iconData.codePoint,
+          orElse: () => const MapEntry('help_outline', Icons.help_outline),
+        )
+        .key; // Retorna um nome padrão se o ícone não for encontrado
+  }
+
   static Icon getIcon(String name) {
     return Icon(
       availableIcons.firstWhere(
@@ -489,19 +527,17 @@ class AppAvaliableIcons {
     );
   }
 
+  static IconData? getIconData(String name) {
+    return availableIcons.firstWhere(
+      (icon) => icon.fontFamily == name,
+      orElse: () => Icons.help_outline, // Ícone padrão se não encontrado
+    );
+  }
+
   static String? getIconNameFromData(IconData iconData) {
     for (var icon in availableIcons) {
       if (icon.codePoint == iconData.codePoint) {
-        return icon.fontFamily; // Retorna o nome da fonte do ícone
-      }
-    }
-    return null; // Retorna null se o ícone não for encontrado
-  }
-
-  static String? getIconName(int codePoint) {
-    for (var icon in availableIcons) {
-      if (icon.codePoint == codePoint) {
-        return icon.fontFamily; // Retorna o nome da fonte do ícone
+        return icon.toString(); // Retorna o nome da fonte do ícone
       }
     }
     return null; // Retorna null se o ícone não for encontrado

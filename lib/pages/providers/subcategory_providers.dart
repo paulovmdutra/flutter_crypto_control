@@ -1,4 +1,4 @@
-import 'package:flutter_crypto_control/controller/subCategory_controller.dart';
+import 'package:flutter_crypto_control/controller/riverpod/subCategory_controller.dart';
 import 'package:flutter_crypto_control/domain/domain_services/interfaces/icrud_usecase.dart';
 import 'package:flutter_crypto_control/domain/domain_services/subCategory_usecase.dart';
 import 'package:flutter_crypto_control/domain/models/sub_category.dart';

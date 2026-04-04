@@ -224,6 +224,9 @@ class CommonError extends Error {
   factory CommonError.conflict({String message = "A conflict occurred."}) =>
       CommonError(code: AppStatusCodes.domainConflict, message: message);
 
+  factory CommonError.unknown(String message) =>
+      CommonError(code: AppStatusCodes.unknown, message: message);
+
   // 🔸 Erro de banco de dados
   factory CommonError.database({
     String message = "A database error occurred.",

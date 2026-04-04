@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_crypto_control/domain/models/category.dart';
 import 'package:flutter_crypto_control/domain/models/transaction.dart';
 import 'package:flutter_crypto_control/pages/app/generic_form/generic_stateful_form.dart';
 import 'package:flutter_crypto_control/shared/app_response_models.dart';
+import 'package:flutter_crypto_control/view_model/category_view_model.dart';
 import 'package:flutter_crypto_control/widgets/color_selector.dart';
 import 'package:flutter_crypto_control/widgets/widgets.dart';
 
-class CategoryForm extends GenericStatefulForm<Category> {
+class CategoryForm extends GenericStatefulForm<CategoryViewModel> {
   CategoryForm({
     super.key,
     super.entityToEdit,
@@ -19,16 +19,11 @@ class CategoryForm extends GenericStatefulForm<Category> {
   });
 
   @override
-  Widget? build(BuildContext context) {
-    throw UnimplementedError();
-  }
-
-  @override
   State<CategoryForm> createState() => CategoryFormDialogState();
 }
 
 class CategoryFormDialogState
-    extends GenericStatefulFormState<CategoryForm, Category> {
+    extends GenericStatefulFormState<CategoryForm, CategoryViewModel> {
   late final TextEditingController _nameController;
 
   ValueNotifier<int> colorValueNotifier = ValueNotifier(Colors.red.toARGB32());
@@ -46,26 +41,24 @@ class CategoryFormDialogState
     );
 
     colorValueNotifier = ValueNotifier(
-      widget.entityToEdit?.colorValue ?? Colors.red.toARGB32(),
+      widget.entityToEdit?.colorValue.toARGB32() ?? Colors.red.toARGB32(),
     );
 
     iconDataNotifier = ValueNotifier(
-      widget.entityToEdit?.iconCodePoint ?? Icons.money_off,
+      widget.entityToEdit?.iconData ?? Icons.money_off,
     );
   }
 
   @override
-  Future<CommonResult<Category?>?> onBeforeSubmit() async {
-    final category = Category(
-      id: widget.entityToEdit?.id ?? 0,
+  Future<CommonResult<CategoryViewModel?>?> onBeforeSubmit() async {
+    final category = CategoryViewModel(
+      publicId: widget.entityToEdit?.publicId ?? '',
       name: _nameController.text,
       type: typeNotifier.value,
-      colorValue: colorValueNotifier.value,
-      iconCodePoint: iconDataNotifier.value,
+      colorValue: Color(colorValueNotifier.value),
+      iconData: iconDataNotifier.value,
       archived: widget.entityToEdit?.archived ?? false,
-      iconName:
-          AppAvaliableIcons.getIconNameFromData(iconDataNotifier.value) ??
-          "help_outline",
+      iconName: AppAvaliableIcons.getIconName(iconDataNotifier.value),
     );
     return CommonResult.success(data: category);
   }
@@ -127,17 +120,10 @@ class CategoryFormDialogState
           ],
         ),
         const SizedBox(height: 15),
-        const Text(
-          'Selecione uma Cor:',
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-        const SizedBox(height: 15),
         // --- Seletor de Cor ---
         ColorSelector(
-          // Use o valor inicial do ValueNotifier
           initialColorARGB32: colorValueNotifier.value,
           onColorSelected: (value) {
-            // Em vez de setState, use o .value do ValueNotifier
             colorValueNotifier.value = value.toARGB32();
           },
         ),
@@ -182,7 +168,6 @@ class IconSelector extends StatelessWidget {
                   .map(
                     (icon) => GestureDetector(
                       onTap: () {
-                        // Em vez de setState, use o .value
                         _iconDataNotifier.value = icon;
                       },
                       child: Container(

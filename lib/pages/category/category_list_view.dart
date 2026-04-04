@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_crypto_control/domain/models/category.dart';
 import 'package:flutter_crypto_control/pages/app/enums.dart';
 import 'package:flutter_crypto_control/pages/app/generic_form/generic_list_tile.dart';
 import 'package:flutter_crypto_control/pages/ipages_factory.dart';
 import 'package:flutter_crypto_control/service_locator.dart';
+import 'package:flutter_crypto_control/view_model/category_view_model.dart';
 import 'package:flutter_crypto_control/widgets/confirmation_dialog.dart';
 import 'package:flutter_crypto_control/widgets/widgets.dart';
 
 class CategoryListView extends StatefulWidget {
-  final List<Category?>? categories;
+  final List<CategoryViewModel?>? categories;
 
   // Callbacks para as ações. Quem chamar esse widget decide o que fazer.
-  final Function(Category) onEdit;
-  final Function(Category) onDelete;
-  final Function(Category)? onArchive;
-  final Function(Category)? onMove;
+  final Function(CategoryViewModel) onEdit;
+  final Function(CategoryViewModel) onDelete;
+  final Function(CategoryViewModel)? onArchive;
+  final Function(CategoryViewModel)? onMove;
 
   const CategoryListView({
     super.key,
@@ -35,17 +35,17 @@ class _CategoryListViewState extends State<CategoryListView> {
     return _buildList(context);
   }
 
-  GenericListTile<Category, DefaultActions> createListTile(
-    Category categoryItem,
+  GenericListTile<CategoryViewModel, DefaultActions> createListTile(
+    CategoryViewModel categoryItem,
     BuildContext context,
   ) {
-    return GenericListTile<Category, DefaultActions>(
+    return GenericListTile<CategoryViewModel, DefaultActions>(
       item: categoryItem,
       onTap: () => widget.onEdit(categoryItem),
       buildLeading: (item) {
         return CircleAvatar(
-          backgroundColor: item.color.withAlpha(50),
-          child: Icon(item.iconCodePoint, color: item.color),
+          backgroundColor: item.colorValue.withAlpha(50),
+          child: Icon(item.iconData, color: item.colorValue),
         );
       },
       buildTitle: (item) {
@@ -114,7 +114,6 @@ class _CategoryListViewState extends State<CategoryListView> {
           case DefaultActions.edit:
             widget.onEdit(categoryItem);
             break;
-
           case DefaultActions.delete:
             showDialog(
               context: context,
@@ -127,12 +126,17 @@ class _CategoryListViewState extends State<CategoryListView> {
               ),
             );
             break;
-          // ... outros cases ...
           case DefaultActions.archive:
             widget.onArchive?.call(categoryItem);
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Ação: Arquivar Categoria')),
+            );
             break;
           case DefaultActions.moveTransactions:
             widget.onMove?.call(categoryItem);
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Ação: Mover Transações')),
+            );
             break;
         }
       },
